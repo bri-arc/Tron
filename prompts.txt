@@ -1,0 +1,437 @@
+Du arbeitest als:
+
+- Senior Game Developer
+- Senior UX Designer
+- Senior Software Architect
+- Product Owner
+- Senior QA Engineer
+
+Wir entwickeln iterativ ein modernes Browser-Arcade-Spiel namens Tron - Neon Grid.
+
+Inspiration:
+
+- Tron Legacy
+- Cyberpunk 2077 UI
+- Geometry Wars
+- Neon Drive
+
+Design-Ziele:
+
+- Schwarze Hintergründe
+- Neonfarbene Lichteffekte
+- Hochwertige Animationen
+- Flüssiges Gameplay
+- Gute Lesbarkeit
+- Professionelle Benutzeroberfläche
+
+Vor jeder Änderung:
+
+1. Analysiere die bestehende Codebasis
+2. Erstelle einen Umsetzungsplan
+3. Implementiere die Änderungen
+4. Prüfe auf Regressionen
+5. Dokumentiere Architekturentscheidungen
+
+Wichtig:
+
+- Bestehende Features dürfen nicht beschädigt werden
+- Die Anwendung muss jederzeit lauffähig bleiben
+- Qualität wichtiger als Geschwindigkeit
+
+Ganz wichtig:
+Erstelle für jede Stufe ein Verzeichnis, in der das Ergebnis dieser Stufe betrachtet werden kann.
+Es soll eine Chronologie der verschiedenen Versionen verfügbar sein um zu zeigen, was nach jeder stufe entstanden ist.
+Die nachfolgende Stufe hat als Basis immer das Ergebnis der vorangegangenen Stufe. Die Inhalte werden dann aus dieser vorangegangenen Stufe
+in die folgende kopiert.
+
+Übersichtsseite:
+Erstelle im Hauptverzeichnis eine index.html, die alle bisher erstellten Stufen verlinkt.
+- Jede Stufe wird als Kachel dargestellt
+- Inhalt einer Kachel: Stufennummer, Titel, Kurzbeschreibung, Liste der neuen Features
+- Die Seite folgt dem Neon-Grid-Design
+- Nach jeder Stufe wird die Übersichtsseite um die neue Stufe ergänzt
+
+BUGS.md:
+Lege in jedem Stufen-Verzeichnis eine Datei BUGS.md an.
+- Sie dient den Testern zum Erfassen von Fehlern dieser Stufe
+- Vorlage als Tabelle mit den Spalten: Nr., Beschreibung, Schritte zur Reproduktion,
+  Erwartetes Verhalten, Tatsächliches Verhalten, Behoben in Stufe
+- Dir bekannte Einschränkungen der Stufe darfst du vorab eintragen
+
+Code-Struktur ab Stufe 3:
+- Neue Funktionalität wird in eigenen Modulen unter src/ umgesetzt,
+  nicht in bestehende Dateien angehängt
+- Keine Datei soll mehr als ca. 400 Zeilen haben
+- Jede Stufe enthält eine aktuelle ARCHITECTURE.md
+- Die Spiellogik wird mit Unit-Tests (node --test) abgesichert.
+  Vor Abschluss jeder Stufe müssen alle Tests grün sein
+- Alle zeitabhängigen Abläufe (Effekte, Power-Ups, Replays, Zeitlupe)
+  laufen über eine eigene, pausierbare Spieluhr statt performance.now(),
+  damit sie bei Pause automatisch mit anhalten
+
+
+--
+
+Stufe 1: MVP
+Erstelle ein vollständiges Browser-Spiel.
+Technologien:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Canvas API
+Gameplay:
+- Der Spieler steuert ein Lightcycle
+- Das Fahrzeug bewegt sich dauerhaft
+- Richtungswechsel mit Pfeiltasten
+- Das Fahrzeug hinterlässt eine Lichtspur
+- Berührung der Wand führt zu Game Over
+- Berührung der eigenen Spur führt zu Game Over
+- Die Bewegung ist grid-basiert: Das Spielfeld besteht aus Zellen,
+  das Fahrzeug bewegt sich pro Spiel-Tick genau eine Zelle weiter
+- Spur und Kollision werden ebenfalls über die Zellen des Rasters bestimmt
+- Eine Wende um 180° ist nicht möglich: Ein Tastendruck in die
+  Gegenrichtung der aktuellen Fahrtrichtung wird ignoriert
+Optik:
+- Schwarzer Hintergrund
+- Cyanfarbener Fahrer
+- Leuchtende Spur
+- Einfaches Raster
+Anforderungen:
+- Keine Menüs
+- Keine Sounds
+- Keine Gegner
+Das Ergebnis soll bewusst wie ein MVP aussehen.
+
+--
+
+Stufe 2: Arcade
+Analysiere die bestehende Anwendung.
+Verwandle den MVP in ein modernes Browser-Arcade-Spiel.
+Neue Features:
+Gameplay:
+- Punktesystem
+- Überlebenszeit
+- Geschwindigkeitssteigerung
+- Highscore
+Persistenz:
+- Speicherung im LocalStorage
+- Anzeige des Rekords
+UI:
+- Startbildschirm
+- Game Over Bildschirm
+- Restart Button
+- Highscore Anzeige
+Steuerung:
+- Start per Button oder Enter
+- Auf schmalen Touch-Displays stehen Richtungstasten unter dem Spielfeld bereit
+Audio:
+- Startsound
+- Game Over Sound
+- Punkte-Sound
+Optik:
+- Neon-Gitter
+- Glow-Effekte
+- Moderne Typografie
+- Animierte Menüs
+- Responsive Design
+Die Anwendung soll wie ein veröffentlichtes Indie-Webgame wirken.
+
+--
+
+Stufe 3: Architektur
+Führe eine vollständige Architektur-Analyse durch.
+Identifiziere:
+- technische Schulden
+- Coupling
+- Wartbarkeitsprobleme
+- Erweiterungsgrenzen
+Refactore die Anwendung.
+Zielstruktur:
+- Jede Komponente liegt in einer eigenen Datei im Ordner src/:
+  src/GameEngine.js, src/Grid.js, src/Player.js, src/Arena.js,
+  src/TrailManager.js, src/CollisionEngine.js, src/AudioManager.js,
+  src/UIManager.js, src/ScoreManager.js, src/ParticleSystem.js
+- Konfigurationsobjekte liegen in src/config.js
+- main.js ist der Einstiegspunkt und verbindet die Komponenten
+- Die Dateien nutzen ES-Module (import/export)
+- Die README.md beschreibt, wie die Stufe über einen lokalen
+  Server gestartet wird (z.B. npx serve)
+- Die Architekturentscheidungen werden in ARCHITECTURE.md
+  dokumentiert
+- Simulation und Rendering sind getrennt: Spiellogik wie GameEngine und
+  CollisionEngine kennt weder DOM noch Canvas und ist unter Node testbar
+- main.js ist der einzige Ort, an dem Abhängigkeiten erzeugt und verbunden
+  werden. Komponenten erhalten ihre Abhängigkeiten über den Konstruktor
+Neue Features:
+- Pause per Button oder Taste P
+- Neustart
+- Leben-System: startet konfigurationsgemäß mit einem Leben,
+  damit das Gameplay unverändert bleibt
+- Level-System
+- Konfigurationsobjekte
+Dokumentiere alle Architekturentscheidungen.
+Das Gameplay darf nicht verändert werden.
+
+--
+
+Stufe 4: Premium
+Verbessere das Spiel zu einer Premium Arcade Experience.
+Gameplay bleibt unverändert.
+Fokus:
+- Atmosphäre
+- Animation
+- Sounds
+- Visuelle Qualität
+Implementiere:
+- Partikeleffekte
+- Funken
+- Lichtexplosionen
+- Bildschirmblitze
+- Kamerawackeln
+- Ladebildschirm
+Optik:
+- Tron Legacy Look
+- Neonblau
+- Neonorange
+- Glow Layer
+- Moderne Cyberpunk UI
+- Farbsemantik: Cyan steht für den sicheren, aktiven Zustand,
+  Orange ist ausschließlich Gefahr und Kollision vorbehalten
+- Glow und Bloom kostengünstig per überlagerter Ebene mit
+  mix-blend-mode: screen statt echtem Post-Processing
+Audio:
+- Elektronische Soundeffekte
+- Synthwave Hintergrundmusik
+Das Spiel soll aussehen wie ein käufliches Steam-Indie-Spiel.
+
+--
+
+Stufe 5: KI-Gegner
+Erweitere Neon Grid um KI-Gegner.
+Implementiere:
+- Einzelspieler gegen KI
+- Mehrere Gegner
+- Unterschiedliche Schwierigkeitsstufen
+KI-Verhalten:
+- Hindernissen ausweichen
+- Eigene Spuren vermeiden
+- Gegner einschließen
+- Defensive und aggressive Strategien
+Zugauflösung:
+- Alle Fahrer entscheiden zuerst ihre Richtung, danach wird gleichzeitig
+  bewegt und Kollisionen werden gemeinsam aufgelöst
+- Wollen zwei Fahrer in dieselbe Zelle (Kopf-an-Kopf), scheiden beide aus
+Spielmodi:
+- Survival: endlos, mit steigendem Tempo und KI-Gegnern
+- Last Cycle Standing: Sieg, sobald alle Gegner ausgeschieden sind,
+  bevor der Spieler selbst kollidiert
+- Time Attack: 60-Sekunden-Score-Run, der Zeitablauf zählt als Erfolg
+Optik:
+- Jeder Gegner besitzt eigene Neonfarbe
+- Eigene Lichtspur
+- Individuelle Effekte
+Die KI-Gegner sollen glaubwürdig wirken.
+
+--
+
+Stufe 6: Power-Ups
+Erweitere das Spiel um Power-Ups.
+Power-Ups:
+- Speed Boost
+- Slow Motion
+- Schild
+- Spur-Löschung
+- Ghost Modus
+- Bombe
+- Multiplikator
+Regeln:
+- Speed Boost und Slow Motion wirken auf alle Fahrer gleichzeitig
+- Schild fängt jede tödliche Kollision ab
+- Ghost erlaubt nur das Durchfahren von Spuren, Wände und
+  Kopf-an-Kopf-Kollisionen bleiben tödlich
+- Spur-Löschung entfernt nur die eigene Spur
+- Die Bombe entfernt alle Spuren in einem Radius um den Spieler,
+  schaltet aber keine Fahrer aus
+Anforderungen:
+- Spawn-System
+- Seltenheitsstufen
+- Balancing
+Optik:
+- Animierte Spawn-Effekte
+- Leuchtende Power-Up Icons
+- Cooldown Anzeige
+Gameplay muss fair bleiben.
+
+--
+
+Stufe 7: Multiplayer
+Transformiere Neon Grid in ein Multiplayer-Spiel.
+Architektur:
+Frontend:
+- Spielclient
+- Lobby
+- Matchmaking
+Backend:
+- NodeJS
+- Express
+- Socket.IO
+Features:
+- Spiel hosten
+- Spiel beitreten
+- Lobby-Code
+- Ready-System
+- Synchronisierte Spielerpositionen
+- Synchronisierte Power-Ups
+UI:
+- Lobby Browser
+- Spielerliste
+- Verbindungsstatus
+- Chat
+Nichtfunktionale Anforderungen:
+- Singleplayer bleibt erhalten
+- Saubere Architektur
+- Erweiterbarkeit
+- Fehlerbehandlung
+
+--
+
+Stufe 8: Power KI
+Implementiere eine Gegner-KI die Überlebenswahrscheinlichkeit maximiert.
+Implementiere 8* oder Floodfill zur Bewertung freier Flächen.
+Ergänzend:
+- Bewerte zusätzlich per Voronoi-Gebietsbewertung, welche freien Zellen
+  die KI vor ihren Gegnern erreichen kann
+- Die neue KI wird als zusätzliche Schwierigkeitsstufe angeboten
+- Die bisherigen Schwierigkeitsstufen bleiben unverändert erhalten
+
+--
+
+Stufe 9: Replay- und Crash-System
+Analysiere die bestehende Anwendung.
+Implementiere ein vollständig neues Replay- und Crash-System.
+Ziel:
+Ein Ausscheiden eines Spielers soll zu einem visuellen Highlight werden.
+Architekturanforderungen:
+- ReplayBuffer
+- EventSystem
+- CameraManager
+- CrashManager
+Vor jedem Frame sollen die letzten 5 Sekunden Spielzustand gespeichert
+werden.
+Zu speichern:
+- Positionen aller Fahrer
+- Bewegungsrichtung
+- Power-Ups
+- Kollisionen
+- Spielstatus
+Bei einer Kollision:
+1. Spiel pausieren
+2. Kamera auf Ereignis fokussieren
+3. Zeitlupe starten
+4. Explosion auslösen
+5. Replay der letzten Sekunden anzeigen
+Anschließend:
+- Ergebnisbildschirm anzeigen
+- Neustart ermöglichen
+Dokumentiere die Architektur.
+
+Replay-Fenster wie im E-Sport
+Erweitere das bestehende Replay-System.
+Bei jeder Kollision eines Gegners:
+- Das Hauptspiel bleibt aktiv
+- Ein Replay-Fenster erscheint unten rechts
+Das Replay zeigt:
+- Die letzten 3 Sekunden
+- Fokus auf den verunglückten Spieler
+- Zeitlupe
+- Kamerazoom
+Design:
+- Futuristischer Monitor-Frame
+- Neonblauer Rahmen
+- Transparenter Hintergrund
+- Sanfte Einblendanimation
+Das Replay soll wirken wie eine TV-Wiederholung bei einem E-Sport Event.
+
+3D-Crash-Szene mit Three.js
+Nutze Three.js für eine separate Crash-Visualisierung.
+Beim Spielende:
+- Wechsel auf eine 3D-Szene
+- Erstelle eine stilisierte Neon-Version des Spielfeldes
+- Stelle die letzten Sekunden als 3D-Replay nach
+Fokus:
+- Zeitlupe
+- Cinematische Kamerafahrt
+- Explosionseffekt
+Das normale Gameplay bleibt vollständig in 2D.
+Ausfallsicherheit:
+- Laden von Three.js und Erzeugen des WebGL-Renderers sind in
+  try/catch gekapselt
+- Schlägt die 3D-Szene fehl oder endet sie nicht, wechselt das Spiel
+  nach einem Timeout automatisch zum Ergebnisbildschirm
+
+--
+
+Stufe 10: Polish & Wow
+Analysiere die bestehende Anwendung.
+Hebe Neon Grid auf das Niveau eines Showcase-Titels.
+
+Korrekturen:
+- Der Modus "Last Cycle Standing" endet, sobald nur noch ein Fahrer übrig ist
+- Replays pausieren das Spiel und werden mittig über dem
+  abgedunkelten Spielfeld gezeigt, per Taste überspringbar
+- Die Lichtspur wird als durchgehende Linie zwischen den
+  Wendepunkten gezeichnet statt als einzelne Punkte
+
+Neue Features:
+- Derezz-Effekt: Beim Ausscheiden zerfällt die Spur des Fahrers
+  in Pixel und verschwindet von hinten nach vorn
+- Lichtwand: Die Spur erhält durch eine leicht geneigte Perspektive
+  sichtbare Höhe. Rendering und Kollision bleiben 2D
+- Lightcycle-Sprite statt Rechteck, das sich in Kurven kurz neigt
+- Lichtwand, Lightcycle-Sprite und Derezz-Effekt funktionieren
+  auch im Replay und in der 3D-Crash-Szene
+- Near-Miss / Grinding: Bonuspunkte für knappes Vorbeifahren an
+  Spuren, mit Funkenflug
+- Near-Miss-Bonuspunkte erhält nur der Spieler, nicht die KI
+- Kurze Zeitlupe bei einem Near-Miss
+- Ansagetexte: "DEREZZED", "LAST CYCLE STANDING", Combo-Popups
+- Gamepad-Support über die Gamepad API
+
+Audio:
+- Motorengeräusch per Web Audio, Tonhöhe abhängig von der
+  Geschwindigkeit, Gegner per Stereo-Panning positioniert
+- Explosion mit Lichtblitz, Funkenregen in Fahrerfarbe,
+  Schockwellen-Ring und passendem Knall
+- Mute-Schalter
+
+Bestehende Features dürfen nicht beschädigt werden.
+Dokumentiere die Architekturentscheidungen.
+
+--
+
+Stufe 11: Showcase
+Analysiere die bestehende Anwendung.
+Erweitere Neon Grid um Inhalte, die es wie einen fertigen
+Arcade-Titel wirken lassen.
+
+Attract Mode:
+- Erfolgt auf dem Startbildschirm einige Sekunden keine Eingabe,
+  startet eine Demo, in der KI-Fahrer gegeneinander spielen
+- Jede Eingabe beendet die Demo und kehrt zum Startbildschirm zurück
+- Die Demo verändert keine Highscores
+
+Dynamische Musik:
+- Die Synthwave-Musik wird intensiver, je weniger Fahrer übrig sind
+
+Arena-Varianten:
+- Höhere Level bringen Hindernisse oder kleinere Arenen mit
+- Die KI muss die Hindernisse erkennen und ihnen ausweichen
+
+Farbthemes:
+- Auswählbare Themes, mindestens:
+  - Klassisch (Cyan/Orange)
+  - Grid Bugs (Rot)
+- Die Auswahl wird im LocalStorage gespeichert
+
+Bestehende Features dürfen nicht beschädigt werden.
+Dokumentiere die Architekturentscheidungen.
