@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#05080d">
+    <title>Tron - Neon Grid | Entwicklungsstufen</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #05080d;
+        color: #e8f7ff;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(ellipse at 50% -20%, rgb(0 217 255 / 13%), transparent 55%),
+          linear-gradient(180deg, #080e16 0%, #05080d 60%);
+      }
+
+      main {
+        width: min(1100px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 72px 0 80px;
+      }
+
+      .eyebrow {
+        margin: 0 0 16px;
+        color: #53eaff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 8vw, 5.5rem);
+        letter-spacing: -0.07em;
+        line-height: 0.98;
+        text-shadow: 0 0 34px rgb(0 217 255 / 20%);
+      }
+
+      .intro {
+        max-width: 620px;
+        margin: 22px 0 48px;
+        color: #95a9b7;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .stage-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: 18px;
+      }
+
+      .stage-card {
+        position: relative;
+        display: block;
+        min-height: 290px;
+        padding: 27px;
+        overflow: hidden;
+        border: 1px solid rgb(74 219 255 / 28%);
+        border-radius: 12px;
+        background: linear-gradient(145deg, rgb(12 25 36 / 94%), rgb(7 13 20 / 97%));
+        box-shadow: inset 0 1px rgb(255 255 255 / 3%), 0 16px 50px rgb(0 0 0 / 25%);
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      }
+
+      .stage-card::after {
+        position: absolute;
+        right: -60px;
+        bottom: -96px;
+        width: 250px;
+        height: 190px;
+        border: 1px solid rgb(0 217 255 / 13%);
+        border-radius: 50%;
+        box-shadow: 0 0 0 20px rgb(0 217 255 / 3%), 0 0 0 42px rgb(0 217 255 / 2%);
+        content: "";
+        pointer-events: none;
+      }
+
+      .stage-card:hover, .stage-card:focus-visible {
+        transform: translateY(-3px);
+        border-color: #4ceaff;
+        outline: none;
+        box-shadow: 0 0 30px rgb(0 217 255 / 12%), 0 18px 55px rgb(0 0 0 / 35%);
+      }
+
+      .stage-number {
+        display: inline-block;
+        margin-bottom: 22px;
+        color: #49e8ff;
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0 0 11px;
+        font-size: 1.6rem;
+        letter-spacing: -0.03em;
+      }
+
+      .stage-description {
+        min-height: 52px;
+        margin: 0 0 21px;
+        color: #9cafbd;
+        line-height: 1.55;
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .features li {
+        padding: 6px 9px;
+        border: 1px solid rgb(65 193 219 / 18%);
+        border-radius: 4px;
+        background: rgb(30 95 112 / 16%);
+        color: #b3eaf1;
+        font-size: 0.76rem;
+      }
+
+      footer {
+        margin-top: 30px;
+        color: #536875;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Tron — Neon Grid / Entwicklungsarchiv</p>
+      <h1>Jede Stufe.<br>Ein neues Grid.</h1>
+      <p class="intro">Die spielbaren Versionen entstehen Schritt für Schritt. Jede Stufe bleibt als eigenständiger Stand erhalten und bildet die Grundlage für die nächste Iteration.</p>
+
+      <section class="stage-list" aria-label="Bisherige Entwicklungsstufen">
+        <a class="stage-card" href="stufe-1-mvp/index.html">
+          <span class="stage-number">Stufe 01 · MVP</span>
+          <h2>Lightcycle online</h2>
+          <p class="stage-description">Der spielbare Kern: ein Lightcycle, ein Raster und eine Spur, der du nicht zu nahe kommen solltest.</p>
+          <ul class="features" aria-label="Neue Features">
+            <li>Grid-Bewegung</li>
+            <li>Spur-Kollision</li>
+            <li>Wand-Kollision</li>
+            <li>Pfeiltasten</li>
+          </ul>
+        </a>
+        <a class="stage-card" href="stufe-2-arcade/index.html">
+          <span class="stage-number">Stufe 02 · Arcade</span><h2>Survival Run</h2>
+          <p class="stage-description">Aus dem MVP wird ein Arcade-Run mit Rekordjagd, Tempoaufbau und eigener Audio-Synthese.</p>
+          <ul class="features"><li>Punkte &amp; Zeit</li><li>Highscore</li><li>Start / Game Over</li><li>Web Audio</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-3-architektur/index.html">
+          <span class="stage-number">Stufe 03 · Architektur</span><h2>System neu geordnet</h2>
+          <p class="stage-description">Game-Services, Konfiguration, Pause und ein Leben-System schaffen ein erweiterbares Fundament.</p>
+          <ul class="features"><li>GameEngine</li><li>Manager-Architektur</li><li>Pause</li><li>Level &amp; Leben</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-4-premium/index.html">
+          <span class="stage-number">Stufe 04 · Premium</span><h2>Neon in Bewegung</h2>
+          <p class="stage-description">Funken, Synthwave und Crash-Feedback verleihen den Runs mehr Atmosphäre.</p>
+          <ul class="features"><li>Partikel</li><li>Blitz &amp; Shake</li><li>Synthwave</li><li>Loading UI</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-5-ki/index.html">
+          <span class="stage-number">Stufe 05 · KI-Gegner</span><h2>Grid Rivals</h2>
+          <p class="stage-description">Fahre gegen drei farbige Rivalen, wähle Schwierigkeit und Arcade-Spielmodus.</p>
+          <ul class="features"><li>3 Gegner</li><li>3 KI-Stufen</li><li>3 Spielmodi</li><li>Eigene Spuren</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-6-powerups/index.html">
+          <span class="stage-number">Stufe 06 · Power-ups</span><h2>Loadout im Grid</h2>
+          <p class="stage-description">Sammle zufällige Buffs und verändere Tempo, Spuren und Überlebenschancen.</p>
+          <ul class="features"><li>7 Power-ups</li><li>Seltenheiten</li><li>Spawn-Cooldown</li><li>Effekt-HUD</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-7-multiplayer/index.html">
+          <span class="stage-number">Stufe 07 · Multiplayer</span><h2>Gemeinsam online</h2>
+          <p class="stage-description">Lobby-Codes, Ready-System und synchronisierte Events mit optionalem Node-Server.</p>
+          <ul class="features"><li>Express</li><li>Socket.IO</li><li>Lobby &amp; Chat</li><li>Solo bleibt</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-8-power-ki/index.html">
+          <span class="stage-number">Stufe 08 · Power KI</span><h2>Expert Survival</h2>
+          <p class="stage-description">Eine zusätzliche KI bewertet freie Flächen und Voronoi-Territorien.</p>
+          <ul class="features"><li>Flood-fill</li><li>Voronoi</li><li>Neue Schwierigkeit</li><li>Alte KI bleibt</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-9-replay/index.html">
+          <span class="stage-number">Stufe 09 · Replay</span><h2>Crash Replay</h2>
+          <p class="stage-description">Kollisionen werden wiederholt; am Run-Ende folgt eine separate 3D-Neon-Crash-Szene.</p>
+          <ul class="features"><li>5-Sekunden-Puffer</li><li>Slow-Motion-TV</li><li>Crash Manager</li><li>Three.js Szene</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-10-polish/index.html">
+          <span class="stage-number">Stufe 10 · Polish</span><h2>Showcase Effects</h2>
+          <p class="stage-description">Zentrale Replays, Derezz, Near-Miss, Gamepad und mehr Rückmeldung im Crash.</p>
+          <ul class="features"><li>Derezz Trails</li><li>Near-Miss Combo</li><li>Gamepad</li><li>Motor-Audio</li></ul>
+        </a>
+        <a class="stage-card" href="stufe-11-showcase/index.html">
+          <span class="stage-number">Stufe 11 · Showcase</span><h2>Neon Grid, komplett</h2>
+          <p class="stage-description">Attract Mode, dynamische Musik, Arena-Varianten und persistente Farbthemes.</p>
+          <ul class="features"><li>KI-Demo</li><li>Level-Arenen</li><li>Adaptive Musik</li><li>2 Themes</li></ul>
+        </a>
+      </section>
+
+      <footer>ENTWICKLUNGSARCHIV · 11 SPIELBARE STUFEN · FINALER STAND: STUFE 11</footer>
+    </main>
+  </body>
+</html>

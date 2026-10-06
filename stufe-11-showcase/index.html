@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#05090e">
+    <title>Stufe 11 — Showcase | Tron - Neon Grid</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="loading-screen" id="loading-screen"><span class="loader-mark"></span><p>GRID INITIALISIERT</p></div>
+    <main class="game-shell">
+      <header class="topbar">
+        <a class="back-link" href="../index.html">← Stufen</a>
+        <div class="brand"><span class="brand-kicker">STUFE 11 / SHOWCASE</span><h1>NEON <span>GRID</span></h1></div>
+        <div class="top-actions"><button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true">AUDIO: ON</button><button class="sound-toggle" id="pause-button" type="button">PAUSE</button></div>
+      </header>
+      <section class="lobby-bar" aria-label="Multiplayer-Lobby">
+        <span id="connection-status">OFFLINE · SOLO SPIELBAR</span>
+        <button id="host-game" type="button">HOST</button>
+        <button id="lobby-browser-toggle" type="button">LOBBY BROWSER</button>
+        <label class="join-code">CODE <input id="lobby-code" maxlength="6" autocomplete="off" aria-label="Lobby-Code"></label>
+        <button id="join-game" type="button">BEITRETEN</button>
+        <button id="ready-toggle" type="button" disabled>READY</button>
+        <button id="start-match" type="button" disabled>START MATCH</button>
+        <button id="chat-toggle" type="button" disabled>CHAT</button>
+      </section>
+      <section class="lobby-browser" id="lobby-browser" aria-label="Offene Lobbys" hidden></section>
+      <section class="lobby-details" id="lobby-details" hidden>
+        <div id="player-list" aria-live="polite"></div>
+        <div class="chat-panel" id="chat-panel" hidden>
+          <ol id="chat-messages" aria-live="polite"></ol>
+          <form id="chat-form"><input id="chat-input" maxlength="240" placeholder="Nachricht"><button>SEND</button></form>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Spielstatistik">
+        <div><span class="stat-label">PUNKTE</span><strong id="score">000000</strong></div>
+        <div><span class="stat-label">ZEIT</span><strong id="time">00:00</strong></div>
+        <div><span class="stat-label">REKORD</span><strong id="high-score">000000</strong></div>
+        <div><span class="stat-label">LIVES</span><strong id="lives">3</strong></div>
+        <div><span class="stat-label">LEVEL</span><strong id="level">01</strong></div>
+      </section>
+
+      <section class="play-area" aria-label="Spielfeld">
+        <canvas id="game" width="800" height="480" aria-label="Lightcycle-Spiel. Steuere mit den Pfeiltasten."></canvas>
+        <div class="replay-monitor" id="replay-monitor" hidden><span>INSTANT REPLAY · ½×</span><canvas id="replay-canvas" width="400" height="240"></canvas><small>ESC / ENTER · ÜBERSPRINGEN</small></div>
+        <div class="overlay" id="overlay">
+          <div class="overlay-panel">
+            <p class="overlay-kicker" id="overlay-kicker">SYSTEM READY</p>
+            <h2 id="overlay-title">ENTER THE GRID</h2>
+            <p id="overlay-copy">Lenke dein Lightcycle. Überlebe so lange du kannst.</p>
+            <div class="setup-row">
+              <label>MODUS<select id="mode-select"><option value="survival">Survival</option><option value="last-cycle">Last Cycle Standing</option><option value="time-attack">Time Attack</option></select></label>
+              <label>KI<select id="difficulty-select"><option value="easy">Easy</option><option value="normal" selected>Standard</option><option value="hard">Aggressiv</option><option value="expert">Expert Survival ★</option></select></label>
+              <label>THEME<select id="theme-select"><option value="classic">Klassisch · Cyan/Orange</option><option value="bugs">Grid Bugs · Rot</option></select></label>
+            </div>
+            <div class="crash-scene" id="crash-scene" hidden><canvas id="crash-canvas"></canvas><div>3D CRASH REPLAY</div></div>
+            <button class="primary-button" id="start-button" type="button">RUN STARTEN</button>
+            <p class="overlay-help">PFEILTASTEN <span>·</span> KEIN U-TURN</p>
+          </div>
+        </div>
+      </section>
+      <div class="power-status" id="power-status" aria-live="polite">POWER-UP SCAN · READY</div>
+      <footer class="game-footer"><p><span class="key-hint">↑ ↓ ← →</span> STEUERN</p><p id="game-message" aria-live="polite">ÜBERLEBE. EROBER DEN HIGH SCORE.</p><p>PLAYER 01</p></footer>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

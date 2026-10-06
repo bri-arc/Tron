@@ -1,0 +1,13 @@
+{
+  "name": "neon-grid-multiplayer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional Express and Socket.IO lobby server for Tron - Neon Grid",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}

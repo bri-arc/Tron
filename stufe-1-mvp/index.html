@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#05090e">
+    <title>Stufe 1 — Lightcycle | Tron - Neon Grid</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar">
+        <a class="back-link" href="../index.html" aria-label="Zur Stufenübersicht">← Übersicht</a>
+        <div class="brand">
+          <span class="brand-kicker">STUFE 01 / MVP</span>
+          <h1>NEON <span>GRID</span></h1>
+        </div>
+        <div class="status" aria-live="polite">
+          <span class="status-light"></span>
+          <span id="status-text">SYSTEM ONLINE</span>
+        </div>
+      </header>
+
+      <section class="play-area" aria-label="Spielfeld">
+        <canvas id="game" width="800" height="480" aria-label="Lightcycle-Spiel. Steuere mit den Pfeiltasten.">
+          Dein Browser unterstützt das Canvas-Element nicht.
+        </canvas>
+      </section>
+
+      <footer class="game-footer">
+        <p><span class="key-hint">↑ ↓ ← →</span> STEUERN <span class="separator">/</span> NICHT UMKEHREN</p>
+        <p id="game-message" aria-live="polite">FAHRE. ÜBERLEBE. HINTERLASSE DEINE SPUR.</p>
+        <p><span class="player-mark"></span> PLAYER 01</p>
+      </footer>
+    </main>
+  </body>
+</html>

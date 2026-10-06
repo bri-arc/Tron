@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#05090e">
+    <title>Stufe 2 — Arcade | Tron - Neon Grid</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar">
+        <a class="back-link" href="../index.html">← Stufen</a>
+        <div class="brand"><span class="brand-kicker">STUFE 02 / ARCADE</span><h1>NEON <span>GRID</span></h1></div>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true">AUDIO: ON</button>
+      </header>
+
+      <section class="dashboard" aria-label="Spielstatistik">
+        <div><span class="stat-label">PUNKTE</span><strong id="score">000000</strong></div>
+        <div><span class="stat-label">ZEIT</span><strong id="time">00:00</strong></div>
+        <div><span class="stat-label">REKORD</span><strong id="high-score">000000</strong></div>
+      </section>
+
+      <section class="play-area" aria-label="Spielfeld">
+        <canvas id="game" width="800" height="480" aria-label="Lightcycle-Spiel. Steuere mit den Pfeiltasten."></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay-panel">
+            <p class="overlay-kicker" id="overlay-kicker">SYSTEM READY</p>
+            <h2 id="overlay-title">ENTER THE GRID</h2>
+            <p id="overlay-copy">Lenke dein Lightcycle. Überlebe so lange du kannst.</p>
+            <button class="primary-button" id="start-button" type="button">RUN STARTEN</button>
+            <p class="overlay-help">PFEILTASTEN <span>·</span> KEIN U-TURN</p>
+          </div>
+        </div>
+      </section>
+      <nav class="touch-controls" aria-label="Touch-Steuerung">
+        <button type="button" data-direction="ArrowUp" aria-label="Nach oben">▲</button>
+        <button type="button" data-direction="ArrowLeft" aria-label="Nach links">◀</button>
+        <button type="button" data-direction="ArrowDown" aria-label="Nach unten">▼</button>
+        <button type="button" data-direction="ArrowRight" aria-label="Nach rechts">▶</button>
+      </nav>
+      <footer class="game-footer"><p><span class="key-hint">↑ ↓ ← →</span> STEUERN</p><p id="game-message" aria-live="polite">ÜBERLEBE. EROBER DEN HIGH SCORE.</p><p>PLAYER 01</p></footer>
+    </main>
+  </body>
+</html>
